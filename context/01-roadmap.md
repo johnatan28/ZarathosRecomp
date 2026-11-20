@@ -27,14 +27,15 @@ Checklist vivo do projeto. Atualize conforme cada marco for concluído.
 - [x] Criar arquivo de configuração `re/ghostrider.toml` combinando o mapa do Ghidra + stubs SCE SDK do `ps2_analyzer`.
 - [x] Rodar `ps2_recomp.exe re/ghostrider.toml` sobre o ELF (`8.435` funções carregadas do Ghidra, `8.338` recompiladas, `97` stubs, `0` falhas de decode, `0` instruções não suportadas, `0` erros).
 - [x] Criar projeto CMake (`CMakeLists.txt` + `runtime/src/main.cpp` + `runtime/src/ghostrider_overrides.cpp`) com Unity Build + PCH linkado com `ps2_runtime.lib`.
-- [x] Compilar o executável nativo `build/Release/ghostcomp.exe` em Release sem erros de compilação ou linkagem.
+- [x] Compilar o executável nativo `build/Release/ZarathosRecomp.exe` em Release sem erros de compilação ou linkagem.
 
 ## Fase 4 — Bring-up do Runtime / HLE
 - [x] Conectar o código recompilado ao runtime base do `PS2Recomp` (`CMakeLists.txt` + `runtime/src/main.cpp` + `runtime/src/ghostrider_overrides.cpp`).
 - [x] Recuperar ponteiros indiretos (`.ctors`, *vtables* C++, callbacks `lui+addiu` e *leaf functions* do RenderWare `PS2All.csl`) — total de **11.309 funções** (`11.211` recompiladas, `98` stubs, `0` erros).
 - [x] Isolar o pool `guestMalloc` do `ps2xRuntime` em RDRAM alta (`0x01D00000`–`0x01EF0000`) para evitar colisão com o heap interno do jogo (`0x00604F70+`) durante `sceGsResetGraph`.
-- [x] Carregar e executar todos os **8 módulos IOP `.IRX` originais** (`SIO2MAN`, `DBCMAN`, `SIO2D`, `PADMAN`, `LIBSD`, `SDRDRV`, `RTFSSIOP`, `RWA`) + alcançar a **primeira renderização real em tela cheia `640x448`** via GS/DMA/GIF!
-- [ ] Avançar além da tela inicial / espera de `sceMc2` (`FUN_0036b870`) para vídeos Bink (`.BIK`), leitura de `GR.ARC`, menu principal e gameplay.
+- [x] Carregar e executar todos os **9 módulos IOP `.IRX` originais** (`SIO2MAN`, `DBCMAN`, `SIO2D`, `PADMAN`, `LIBSD`, `SDRDRV`, `RTFSSIOP`, `RWA`, `MC2_D`) + alcançar a **primeira renderização real em tela cheia `640x448`** via GS/DMA/GIF!
+- [x] Implementar HLE de handshake e DMA do **RenderWare Audio (`RWA.IRX`)** em `runtime/src/ghostrider_overrides.cpp` (`0x36B870`, `0x36BC20`, `0x36BFB0`, `0x399F00`) — superando a espera de 600 VSyncs, carregando bancos de áudio + `MC2_D.IRX` + assets de `GR.ARC` e entrando no loop contínuo de renderização *double-buffered* (`dma=6.326`, `gif=46`, `0` crashes)!
+- [ ] Testar navegação interativa no frontend/menu principal, vídeos Bink (`.BIK`), carregamento de fase 3D e áudio real.
 
 ## Fase 5 — Subsistemas e Jogabilidade
 - [ ] Entrada/controles (mapeamento DualShock 2 via SDL).

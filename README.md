@@ -28,7 +28,7 @@
 | **Phase 1** | Target ELF metadata (`SLUS_213.06`), sections & initial Ghidra analysis | Completed |
 | **Phase 2** | Symbol triage (`334` SCE SDK matches) & Ghidra + gap function map (`11,309` funcs) | Completed |
 | **Phase 3** | Static recompilation (`11,211` recompiled, `98` stubs) & native `ZarathosRecomp.exe` build | Completed |
-| **Phase 4** | Runtime / HLE bring-up (GS/DMA/VIF1/VU1 + all 8 IOP `.IRX` drivers booted!) | In Progress |
+| **Phase 4** | Runtime / HLE bring-up (9 IOP `.IRX` drivers, RWA SIF HLE, live 640×448 double-buffered rendering!) | In Progress |
 | **Phase 5** | Graphics (GS/VU), audio (SPU2), input & gameplay verification | Pending |
 
 Detailed progress and technical notes live in [`context/`](./context/).

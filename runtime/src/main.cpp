@@ -13,7 +13,7 @@ namespace
     {
         std::set_terminate([]()
                            {
-                               std::cerr << "[ghostcomp][terminate] unhandled exception" << std::endl;
+                               std::cerr << "[ZarathosRecomp][terminate] unhandled exception" << std::endl;
                                const std::exception_ptr ep = std::current_exception();
                                if (ep)
                                {
@@ -23,19 +23,19 @@ namespace
                                    }
                                    catch (const std::system_error &e)
                                    {
-                                       std::cerr << "[ghostcomp][terminate] std::system_error code="
+                                       std::cerr << "[ZarathosRecomp][terminate] std::system_error code="
                                                  << e.code().value()
                                                  << " category=" << e.code().category().name()
                                                  << " message=" << e.what() << std::endl;
                                    }
                                    catch (const std::exception &e)
                                    {
-                                       std::cerr << "[ghostcomp][terminate] std::exception: "
+                                       std::cerr << "[ZarathosRecomp][terminate] std::exception: "
                                                  << e.what() << std::endl;
                                    }
                                    catch (...)
                                    {
-                                       std::cerr << "[ghostcomp][terminate] non-std exception" << std::endl;
+                                       std::cerr << "[ZarathosRecomp][terminate] non-std exception" << std::endl;
                                    }
                                }
                                std::abort();
@@ -105,11 +105,11 @@ int main(int argc, char *argv[])
     }
     catch (const std::exception &e)
     {
-        std::cerr << "[ghostcomp] Fatal exception: " << e.what() << std::endl;
+        std::cerr << "[ZarathosRecomp] Fatal exception: " << e.what() << std::endl;
     }
     catch (...)
     {
-        std::cerr << "[ghostcomp] Fatal unknown exception." << std::endl;
+        std::cerr << "[ZarathosRecomp] Fatal unknown exception." << std::endl;
     }
 
     std::cout.flush();
