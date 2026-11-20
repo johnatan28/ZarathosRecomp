@@ -1,0 +1,66 @@
+# Arquivos proprietários do jogo (NUNCA versionar)
+game/*
+!game/README.md
+*.iso
+*.ISO
+*.bin
+*.BIN
+*.cue
+*.CUE
+*.chd
+*.CHD
+*.cso
+*.CSO
+*.elf
+*.ELF
+*.irx
+*.IRX
+*.pss
+*.PSS
+*.bik
+*.BIK
+*.adx
+*.ADX
+*.img
+*.IMG
+*.pak
+*.PAK
+*.wad
+*.WAD
+SLUS_*
+SLES_*
+SLPM_*
+SLPS_*
+SCUS_*
+SCES_*
+
+# Código C++ gerado automaticamente pelo PS2Recomp (gerado localmente a partir do ELF)
+generated/
+
+# Projetos, caches e bancos locais do Ghidra
+*.gpr
+*.rep/
+.ghidra/
+
+# Builds e artefatos compilados
+build/
+out/
+dist/
+*.obj
+*.o
+*.exe
+*.dll
+*.pdb
+*.lib
+*.a
+
+# Ferramentas externas e downloads temporários
+tools/PS2Recomp/
+tools/downloads/
+tools/ghidra/
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
