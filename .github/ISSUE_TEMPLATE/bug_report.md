@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a crash, recompilation error, or runtime issue in ghostcomp
+about: Report a crash, recompilation error, or runtime issue in ZarathosRecomp
 title: "[Bug]: "
 labels: bug
 ---

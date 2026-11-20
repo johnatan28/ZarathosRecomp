@@ -71,32 +71,32 @@ int main(int argc, char *argv[])
         const std::string elfPathStr = elfPath.string();
         const std::string elfName = elfPath.filename().string();
 
-        std::cout << "[ghostcomp] Starting Ghost Rider (PS2) static recompilation runner" << std::endl;
-        std::cout << "[ghostcomp] Guest ELF: " << elfPathStr << std::endl;
+        std::cout << "[ZarathosRecomp] Starting Ghost Rider (PS2) native PC recompilation runner" << std::endl;
+        std::cout << "[ZarathosRecomp] Guest ELF: " << elfPathStr << std::endl;
 
         if (!std::filesystem::exists(elfPath))
         {
-            std::cerr << "[ghostcomp] Error: ELF not found at '" << elfPathStr << "'." << std::endl;
-            std::cerr << "[ghostcomp] Place your legally extracted SLUS_213.06 in game/ or pass its path as argv[1]." << std::endl;
+            std::cerr << "[ZarathosRecomp] Error: ELF not found at '" << elfPathStr << "'." << std::endl;
+            std::cerr << "[ZarathosRecomp] Place your legally extracted SLUS_213.06 in game/ or pass its path as argv[1]." << std::endl;
             return 1;
         }
 
-        const std::string windowTitle = "ghostcomp | Ghost Rider (PS2) | " + elfName;
+        const std::string windowTitle = "ZarathosRecomp | Ghost Rider (PS2) | " + elfName;
 
         PS2Runtime runtime;
         if (!runtime.initialize(windowTitle.c_str()))
         {
-            std::cerr << "[ghostcomp] Failed to initialize PS2Runtime." << std::endl;
+            std::cerr << "[ZarathosRecomp] Failed to initialize PS2Runtime." << std::endl;
             return 1;
         }
 
         if (!runtime.loadELF(elfPathStr))
         {
-            std::cerr << "[ghostcomp] Failed to load ELF: " << elfPathStr << std::endl;
+            std::cerr << "[ZarathosRecomp] Failed to load ELF: " << elfPathStr << std::endl;
             return 1;
         }
 
-        std::cout << "[ghostcomp] ELF loaded successfully. Entering recompiled guest execution..." << std::endl;
+        std::cout << "[ZarathosRecomp] ELF loaded successfully. Entering recompiled guest execution..." << std::endl;
         runtime.run();
 
         std::cout.flush();

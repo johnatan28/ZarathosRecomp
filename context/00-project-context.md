@@ -2,9 +2,9 @@
 
 ## 1. Objetivo
 
-Construir **`ghostcomp`**, uma recompilação estática nativa para PC de **Ghost Rider (2007)** (Climax Studios / 2K Games), convertendo o executável original do console para C/C++ compilável nativamente, apoiado por análise no **Ghidra** e automação via **REA (Reverse Engineer Anything)**.
+Construir **`ZarathosRecomp`**, uma recompilação estática nativa para PC de **Ghost Rider (2007)** (Climax Studios / 2K Games), convertendo o executável original do console para C/C++ compilável nativamente, apoiado por análise no **Ghidra** e automação via **REA (Reverse Engineer Anything)**.
 
-- **Nome do repositório GitHub:** `ghostcomp`
+- **Nome do repositório GitHub:** `ZarathosRecomp` (`https://github.com/johnatan28/ZarathosRecomp`)
 - **Licença:** GNU GPL v3.0 (alinhada ao `PS2Recomp` e ao padrão da comunidade de recompilação estática)
 
 ## 2. Escolha da Plataforma: Por que PlayStation 2 (PS2)?

@@ -1,6 +1,6 @@
-# Contributing to ghostcomp
+# Contributing to ZarathosRecomp
 
-Thank you for your interest in contributing to **ghostcomp**! Because this is a static recompilation and reverse-engineering project, all contributions **must strictly follow clean-room community guidelines**.
+Thank you for your interest in contributing to **ZarathosRecomp**! Because this is a static recompilation and reverse-engineering project, all contributions **must strictly follow clean-room community guidelines**.
 
 ## Mandatory Legal Rules
 

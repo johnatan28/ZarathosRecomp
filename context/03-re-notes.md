@@ -87,6 +87,11 @@ Registro de descobertas verificadas a partir da análise estática (`SLUS_213.06
 
 ## 6. Pontos de Atenção para Próximas Fases
 
+- **Progresso de Bring-up (`ZarathosRecomp.exe`) — 2026-11-20:**
+  - **Boot #1–#3:** Recuperamos `559` funções indiretas (`.ctors` + *vtables*), `+937` de referências `lui+addiu` e buracos no `.text`, e `+1.376` *leaf functions* + `363` fronteiras de ponteiros de dados via `re/scripts/fill_csv_gaps.py` (total: **11.309 funções**). O RenderWare inicializou GS + DMA + VIF1 + VU1 (`.vudata` em `0x577f30`).
+  - **Boot #4:** Todos os **8 drivers IOP `.IRX`** carregaram e rodaram código R3000A no `ps2xIOP` (`SDR driver version 4.0.1`, `RTFSSIOP.IRX`, `IOP RwaRPCOpen`).
+  - **Boot #5–#6 (Diagnóstico de colisão de heap):** O loop infinito em `FUN_00269c60` foi causado pelo `guestMalloc` do `ps2xRuntime` (em `sceGsResetGraph`) alocando 128 bytes em `0x00604F70` — sobrescrevendo as sentinelas STL alocadas pelo `malloc` interno do jogo (`0x00604F70`/`0x00604F80`).
+  - **Boot #7 (PRIMEIRA IMAGEM REAL `640x448`!):** Com o isolamento do pool host-side em `0x01D00000`–`0x01EF0000` (`runtime/src/ghostrider_overrides.cpp`), o jogo passou limpo por `FUN_00269c60`, subiu 8 faixas RGBA (`640x63` + `640x7` = **`640x448`**) para VRAM e desenhou a **primeira tela cheia texturizada** (`fbp=140`, `activeThreads=2`, `dma=75`, `gif=18`, `0` crashes)! Em seguida, aguarda até 600 VSyncs em `FUN_0036b870` (`sceGsSyncV(0)`, inicialização assíncrona de `sceMc2`/IOP).
 - **Código sinalizado como self-modifying pelo `ps2_analyzer`:** `0x001985D8`, `0x00199A88`, `0x0019B330`, `0x001B1DE8`, `0x001C22D8`, `0x0023F740` — revisar no Ghidra se são falsos positivos (ex.: escrita em buffers DMA/VIF/VU) ou código dinâmico real.
 - **Módulos IOP customizados (RenderWare):** `MODULES/RWS/RTFSSIOP.IRX` e `MODULES/RWS/RWA.IRX` serão cruciais na Fase 4 (avaliar execução via `ps2xIOP` vs. HLE de filesystem para `GR.ARC`).
 - **Vídeos Bink (`.BIK`):** decodificados em software no EE (não dependem de IPU/MPEG PS2 para cutscenes `.BIK`).

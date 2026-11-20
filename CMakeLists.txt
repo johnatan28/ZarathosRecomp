@@ -18,6 +18,7 @@ set(GHOSTCOMP_DEFAULT_ELF "${CMAKE_SOURCE_DIR}/game/SLUS_213.06"
 option(GHOSTCOMP_UNITY_BUILD "Enable CMake Unity Build for fast compilation of recompiled functions" ON)
 set(GHOSTCOMP_UNITY_BATCH_SIZE 64 CACHE STRING "Number of generated .cpp files per unity batch")
 option(GHOSTCOMP_USE_PCH "Enable precompiled headers for generated files" ON)
+option(GHOSTCOMP_FAST_ITERATION "Use /Od on generated recompiled files and register_functions.cpp for rapid Phase 4 bring-up builds" ON)
 
 if(NOT EXISTS "${GHOSTCOMP_GENERATED_DIR}/register_functions.cpp")
     message(FATAL_ERROR
@@ -41,6 +42,8 @@ add_executable(ghostcomp
     runtime/src/ghostrider_overrides.cpp
     ${GHOSTCOMP_GENERATED_SOURCES}
 )
+
+set_target_properties(ghostcomp PROPERTIES OUTPUT_NAME "ZarathosRecomp")
 
 target_include_directories(ghostcomp PRIVATE
     "${GHOSTCOMP_GENERATED_DIR}"
@@ -85,6 +88,12 @@ endif()
 
 if(MSVC)
     target_compile_options(ghostcomp PRIVATE /FS /bigobj /wd4101 /wd4102 /wd4244 /wd4267 /wd4305 /wd4805)
+    # Never waste minutes optimizing the 230k-line static function-table initializer
+    set_source_files_properties("${GHOSTCOMP_GENERATED_DIR}/register_functions.cpp" PROPERTIES COMPILE_OPTIONS "/Od")
+    if(GHOSTCOMP_FAST_ITERATION)
+        # Keep /MD runtime ABI matching Release ps2_runtime.lib while compiling generated units ~10x faster
+        target_compile_options(ghostcomp PRIVATE $<$<CONFIG:Release>:/Od>)
+    endif()
     # Same workaround used by PS2Recomp's ps2EntryRunner for WinAPI vs raylib CloseWindow/ShowCursor clash
     target_link_options(ghostcomp PRIVATE "/FORCE:MULTIPLE")
 endif()

@@ -1,12 +1,22 @@
-# ghostcomp
+<div align="center">
 
-**ghostcomp** is an experimental static recompilation project for **Ghost Rider (2007)** (PlayStation 2 — MIPS R5900 / Emotion Engine), targeting native PC execution using **Ghidra**, **REA (Reverse Engineer Anything)**, and **[PS2Recomp](https://github.com/ran-j/PS2Recomp)**.
+# ZarathosRecomp
+### Ghost Rider (PS2) — Native PC Port & Static Recompilation
+
+[![Platform](https://img.shields.io/badge/Platform-PlayStation%202%20%E2%86%92%20PC-orange?style=for-the-badge)](https://github.com/johnatan28/ZarathosRecomp)
+[![Engine](https://img.shields.io/badge/Engine-RenderWare%203.7-red?style=for-the-badge)](https://github.com/johnatan28/ZarathosRecomp)
+[![Recompiler](https://img.shields.io/badge/Recompiler-PS2Recomp-blue?style=for-the-badge)](https://github.com/ran-j/PS2Recomp)
+[![License](https://img.shields.io/badge/License-GPL--3.0-green?style=for-the-badge)](./LICENSE)
+
+</div>
+
+**ZarathosRecomp** is an experimental static recompilation and native PC port project for **Ghost Rider (2007)** (PlayStation 2 — MIPS R5900 / Emotion Engine), built using **Ghidra**, **REA (Reverse Engineer Anything)**, and **[PS2Recomp](https://github.com/ran-j/PS2Recomp)**.
 
 > **⚠️ Legal & Clean-Room Disclaimer**
 >
 > This repository **does NOT contain** any copyrighted game assets, ISO images, PS2 BIOS files, original ELF executables, or auto-generated recompiled C++ code derived from the game binary.
 >
-> To build and run `ghostcomp`, you **must provide your own legally obtained copy** of *Ghost Rider* (PlayStation 2). This project is an independent, non-commercial preservation and technical engineering effort and is not affiliated with, endorsed by, or associated with Marvel, 2K Games, Climax Studios, or Sony Interactive Entertainment.
+> To build and run `ZarathosRecomp`, you **must provide your own legally obtained copy** of *Ghost Rider* (PlayStation 2). This project is an independent, non-commercial preservation and technical engineering effort and is not affiliated with, endorsed by, or associated with Marvel, 2K Games, Climax Studios, or Sony Interactive Entertainment.
 
 ---
 
@@ -16,9 +26,9 @@
 |-------|-----------|--------|
 | **Phase 0** | Environment setup (Ghidra 12.2 + EmotionEngine + REA + PS2Recomp) | Completed |
 | **Phase 1** | Target ELF metadata (`SLUS_213.06`), sections & initial Ghidra analysis | Completed |
-| **Phase 2** | Symbol triage (`334` SCE SDK matches) & Ghidra function map export (`8,454` funcs) | In Progress |
-| **Phase 3** | Static recompilation (`8,338` recompiled, `97` stubs) & native `ghostcomp.exe` Release build | Completed |
-| **Phase 4** | Runtime / HLE bring-up (syscalls, memory, VFS, boot loop) | Next |
+| **Phase 2** | Symbol triage (`334` SCE SDK matches) & Ghidra + gap function map (`11,309` funcs) | Completed |
+| **Phase 3** | Static recompilation (`11,211` recompiled, `98` stubs) & native `ZarathosRecomp.exe` build | Completed |
+| **Phase 4** | Runtime / HLE bring-up (GS/DMA/VIF1/VU1 + all 8 IOP `.IRX` drivers booted!) | In Progress |
 | **Phase 5** | Graphics (GS/VU), audio (SPU2), input & gameplay verification | Pending |
 
 Detailed progress and technical notes live in [`context/`](./context/).
@@ -37,7 +47,7 @@ Detailed progress and technical notes live in [`context/`](./context/).
 [PS2Recomp (ps2xAnalyzer + ps2xRecomp)]
           │
           ▼  (local C++ generation into generated/)
-[ghostcomp Runtime / Game Overrides + ps2xRuntime]
+[ZarathosRecomp Runtime / Game Overrides + ps2xRuntime]
           │
           ▼
 [Native PC Executable]
@@ -48,8 +58,9 @@ Detailed progress and technical notes live in [`context/`](./context/).
 ## Repository Layout
 
 ```text
-ghostcomp/
+ZarathosRecomp/
 ├── .github/                 # Issue templates & repository standards
+├── AGENTS.md                # AI coding agent & contributor workflow guide
 ├── context/                 # Project architecture, roadmap, setup guide & RE notes
 ├── game/                    # Local user-supplied ELF/assets (git-ignored)
 ├── re/                      # Ghidra scripts, symbol maps (.csv/.toml) & recomp configs

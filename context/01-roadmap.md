@@ -30,10 +30,11 @@ Checklist vivo do projeto. Atualize conforme cada marco for concluído.
 - [x] Compilar o executável nativo `build/Release/ghostcomp.exe` em Release sem erros de compilação ou linkagem.
 
 ## Fase 4 — Bring-up do Runtime / HLE
-- [ ] Conectar o código recompilado ao runtime base do `PS2Recomp` em `runtime/`.
-- [ ] Implementar/ajustar stubs de syscalls do kernel EE, alocação de memória e leitura de arquivos (redirecionando leitura de DVD/ISO para pasta local).
-- [ ] Alcançar a execução das rotinas de boot até o loop principal sem crash imediato.
-- [ ] Depurar chamadas indiretas faltantes e registradores divergentes (usando logs e comparação com PCSX2 quando necessário).
+- [x] Conectar o código recompilado ao runtime base do `PS2Recomp` (`CMakeLists.txt` + `runtime/src/main.cpp` + `runtime/src/ghostrider_overrides.cpp`).
+- [x] Recuperar ponteiros indiretos (`.ctors`, *vtables* C++, callbacks `lui+addiu` e *leaf functions* do RenderWare `PS2All.csl`) — total de **11.309 funções** (`11.211` recompiladas, `98` stubs, `0` erros).
+- [x] Isolar o pool `guestMalloc` do `ps2xRuntime` em RDRAM alta (`0x01D00000`–`0x01EF0000`) para evitar colisão com o heap interno do jogo (`0x00604F70+`) durante `sceGsResetGraph`.
+- [x] Carregar e executar todos os **8 módulos IOP `.IRX` originais** (`SIO2MAN`, `DBCMAN`, `SIO2D`, `PADMAN`, `LIBSD`, `SDRDRV`, `RTFSSIOP`, `RWA`) + alcançar a **primeira renderização real em tela cheia `640x448`** via GS/DMA/GIF!
+- [ ] Avançar além da tela inicial / espera de `sceMc2` (`FUN_0036b870`) para vídeos Bink (`.BIK`), leitura de `GR.ARC`, menu principal e gameplay.
 
 ## Fase 5 — Subsistemas e Jogabilidade
 - [ ] Entrada/controles (mapeamento DualShock 2 via SDL).
