@@ -12,23 +12,22 @@ Checklist vivo do projeto. Atualize conforme cada marco for concluído.
 - [x] Clonar e compilar o **PS2Recomp** em `tools/PS2Recomp` (`ps2_recomp.exe`, `ps2_analyzer.exe`, `ps2_runtime.lib`, `ps2xStudio.exe` compilados em Release).
 
 ## Fase 1 — Binário Alvo e Análise Inicial no Ghidra
-- [ ] Extrair o executável principal (`SLUS_...` ou `SLES_...`) da sua cópia legal do *Ghost Rider* (PS2) e colocá-lo em `game/`.
-- [ ] Registrar região, nome do ELF, tamanho, seções e hash SHA-256 em `context/03-re-notes.md`.
-- [ ] Importar o ELF no Ghidra com o processador **MIPS R5900 (Emotion Engine)** e rodar a análise inicial.
-- [ ] Verificar se existem símbolos STABS/DWARF residuais, strings de debug, nomes de arquivos fonte (`.cpp`/`.c`) ou RTTI.
+- [x] Extrair o executável principal (`SLUS_213.06`, NTSC-U v1.01) e `MODULES/` da cópia local do *Ghost Rider* (PS2) para `game/`.
+- [x] Registrar região, nome do ELF, tamanho, seções e hash SHA-256 em `context/03-re-notes.md`.
+- [x] Importar o ELF no Ghidra 12.2 com o processador **MIPS R5900 (`r5900:LE:32:default`)** e rodar a análise inicial (`8.454` funções, `10.319` strings).
+- [x] Verificar strings de debug/engine: confirmado **RenderWare Graphics/Physics/Audio/FS 3.7** + **Bink Video** + **PS2 SDK 3.0.0 (`IOPRP300.IMG`)**.
 
-## Fase 2 — Triage de Funções e Engenharia Reversa (Ghidra + REA)
-- [ ] Mapear o ponto de entrada (`entry` / `_start` → `main`) e o loop principal.
-- [ ] Identificar e rotular funções da biblioteca padrão C/C++ e do PS2 SDK (`sce*`, `sif*`, `gs*`, `dma*`, `cdvd*`, `pad*`, threads/semáforos).
-- [ ] Usar o **REA** para acelerar a identificação de subsistemas (engine, gerenciador de memória, sistema de arquivos, áudio, gráficos, input).
-- [ ] Corrigir limites de função, *jump tables* e chamadas indiretas (ponteiros de função / vtables) que o analisador automático não resolveu.
-- [ ] Rodar `ExportPS2Functions.java` (do `PS2Recomp`) para gerar o mapa de funções em `re/`.
+## Fase 2 — Triage de Funções e Engenharia Reversa (Ghidra + PS2Recomp)
+- [x] Mapear o ponto de entrada (`0x0025B718`, `_InitSys` em `0x0025B8A8`) e `_mips_gp0_value = 0x005B7E70`.
+- [x] Identificar e rotular `334` funções do PS2 SDK (`89` mapeadas para stubs do `ps2xRuntime`, `320` aplicadas diretamente no projeto Ghidra).
+- [x] Exportar mapa de funções do Ghidra (`re/ghostrider_ghidra_functions.csv`) via `re/scripts/ExportPS2Headless.java`.
+- [ ] Revisar funções sinalizadas como self-modifying / jump tables faltantes e expandir cobertura de símbolos de jogo/RenderWare.
 
 ## Fase 3 — Recompilação Estática (`PS2Recomp`)
-- [ ] Criar arquivo de configuração `.toml` específico do *Ghost Rider* em `re/`.
-- [ ] Rodar `ps2xAnalyzer` e `ps2xRecomp` sobre o ELF + mapa de funções exportado do Ghidra.
-- [ ] Resolver eventuais instruções R5900/MMI/VU não cobertas ou funções problemáticas (via stubs ou ajustes no mapa).
-- [ ] Obter geração limpa do código C++ recompilado e compilar o projeto CMake sem erros de sintaxe/linkagem.
+- [x] Criar arquivo de configuração `re/ghostrider.toml` combinando o mapa do Ghidra + stubs SCE SDK do `ps2_analyzer`.
+- [x] Rodar `ps2_recomp.exe re/ghostrider.toml` sobre o ELF (`8.435` funções carregadas do Ghidra, `8.338` recompiladas, `97` stubs, `0` falhas de decode, `0` instruções não suportadas, `0` erros).
+- [x] Criar projeto CMake (`CMakeLists.txt` + `runtime/src/main.cpp` + `runtime/src/ghostrider_overrides.cpp`) com Unity Build + PCH linkado com `ps2_runtime.lib`.
+- [x] Compilar o executável nativo `build/Release/ghostcomp.exe` em Release sem erros de compilação ou linkagem.
 
 ## Fase 4 — Bring-up do Runtime / HLE
 - [ ] Conectar o código recompilado ao runtime base do `PS2Recomp` em `runtime/`.

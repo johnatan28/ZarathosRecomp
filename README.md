@@ -15,10 +15,10 @@
 | Phase | Milestone | Status |
 |-------|-----------|--------|
 | **Phase 0** | Environment setup (Ghidra 12.2 + EmotionEngine + REA + PS2Recomp) | Completed |
-| **Phase 1** | Target ELF metadata, sections & initial Ghidra analysis | Pending |
-| **Phase 2** | Symbol triage, SDK identification & Ghidra function map export | Pending |
-| **Phase 3** | Static recompilation (`ps2_recomp`) & clean native C++ build | Pending |
-| **Phase 4** | Runtime / HLE bring-up (syscalls, memory, VFS, boot loop) | Pending |
+| **Phase 1** | Target ELF metadata (`SLUS_213.06`), sections & initial Ghidra analysis | Completed |
+| **Phase 2** | Symbol triage (`334` SCE SDK matches) & Ghidra function map export (`8,454` funcs) | In Progress |
+| **Phase 3** | Static recompilation (`8,338` recompiled, `97` stubs) & native `ghostcomp.exe` Release build | Completed |
+| **Phase 4** | Runtime / HLE bring-up (syscalls, memory, VFS, boot loop) | Next |
 | **Phase 5** | Graphics (GS/VU), audio (SPU2), input & gameplay verification | Pending |
 
 Detailed progress and technical notes live in [`context/`](./context/).

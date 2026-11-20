@@ -37,10 +37,15 @@ SCES_*
 # Código C++ gerado automaticamente pelo PS2Recomp (gerado localmente a partir do ELF)
 generated/
 
+# Artefatos locais de análise com caminhos da máquina ou dump bruto de strings
+re/ghostrider_analyzer.toml
+re/ghostrider_strings_summary.txt
+
 # Projetos, caches e bancos locais do Ghidra
 *.gpr
 *.rep/
 .ghidra/
+ghidra_project/
 
 # Builds e artefatos compilados
 build/

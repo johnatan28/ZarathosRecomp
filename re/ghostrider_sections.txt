@@ -1,0 +1,43 @@
+# Memory blocks reported by Ghidra (SLUS_213.06)
+# Language: r5900:LE:32:default
+# ImageBase: 00100000
+Name                     Start        End          Size       Perm  Init 
+.text                    0x00100000   0x003A27E3   2762724    RWX   yes  
+.vutext                  0x003A27F0   0x003A540F   11296      RWX   yes  
+.data                    0x003A5480   0x00577F27   1911464    RWX   yes  
+.vudata                  0x00577F30   0x00577FEF   192        RWX   yes  
+.rodata                  0x00578000   0x005AFC07   228360     RWX   yes  
+.gcc_except_table        0x005AFC80   0x005AFE4F   464        RWX   yes  
+.lit4                    0x005AFE80   0x005B067B   2044       RWX   yes  
+.sdata                   0x005B0680   0x005B10CF   2640       RWX   yes  
+.sbss                    0x005B1100   0x005B1497   920        RWX   no   
+.bss                     0x005B1500   0x00604F63   342628     RWX   no   
+registers.io             0x10000000   0x1000FFFF   65536      RW-   no   
+vu0.code                 0x11000000   0x11000FFF   4096       RWX   no   
+vu0.data                 0x11004000   0x11004FFF   4096       RW-   no   
+vu1.code                 0x11008000   0x1100BFFF   16384      RWX   no   
+vu1.data                 0x1100C000   0x1100FFFF   16384      RW-   no   
+registers.gs             0x12000000   0x12001FFF   8192       RW-   no   
+iop_ram                  0x1C000000   0x1DFFFFFF   33554432   RWX   no   
+RAM(uncached)            0x20000000   0x21E847FF   32000000   R--   no   
+RAM(uncached_and_accelerated) 0x30100000   0x31F847FF   32000000   R--   no   
+scratchpad               0x70000000   0x70003FFF   16384      RW-   no   
+BIOS/rom09(cached)       0x9FC00000   0x9FCFFFFF   1048576    R--   no   
+BIOS/rom0b(uncached)     0xBFC00000   0xBFCFFFFF   1048576    R--   no   
+.DVP.overlay..0x0.1155961123.23.0 0x00000000   0x00000557   1368       ---   yes  
+.DVP.overlay..0x0.206163587.7.0 0x00000000   0x0000001F   32         ---   yes  
+.DVP.overlay..0x0.2250509715.6.0 0x00000000   0x000001EF   496        ---   yes  
+.DVP.overlay..0x0.2250509971.6.0 0x00000000   0x0000025F   608        ---   yes  
+.DVP.overlay..0x0.3016489043.17.0 0x00000000   0x000007FF   2048       ---   yes  
+.DVP.overlay..0x0.3655776339.39.0 0x00000000   0x000007FF   2048       ---   yes  
+.DVP.overlay..0x0.412131731.6.0 0x00000000   0x00000147   328        ---   yes  
+.DVP.overlay..0x0.412131987.6.0 0x00000000   0x00000177   376        ---   yes  
+.DVP.overlay..unknvma.3016489043.498.1 0x00000000   0x000007C7   1992       ---   yes  
+.DVP.overlay..unknvma.3655776339.583.1 0x00000000   0x000006EF   1776       ---   yes  
+.DVP.ovlystrtab          0x00000000   0x0000015E   351        ---   yes  
+.DVP.ovlytab             0x00000000   0x00000077   120        ---   yes  
+.reginfo                 0x00000000   0x00000017   24         ---   yes  
+.shstrtab                0x00000000   0x000001EB   492        ---   yes  
+_elfHeader               0x00000000   0x00000033   52         ---   yes  
+_elfProgramHeaders       0x00000000   0x0000001F   32         ---   yes  
+_elfSectionHeaders       0x00000000   0x0000040F   1040       ---   yes  
